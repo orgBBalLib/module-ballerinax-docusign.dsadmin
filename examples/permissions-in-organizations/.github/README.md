@@ -1,1 +1,0 @@
-../view-permissions-in-organziations.md
