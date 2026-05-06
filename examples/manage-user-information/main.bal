@@ -28,17 +28,16 @@ configurable string email = os:getEnv("EMAIL");
 configurable string serviceUrl = os:getEnv("SERVICE_URL");
 
 public function main() returns error? {
-    dsadmin:Client docuSignClient = check new (
-        {
-            auth: {
-                clientId,
-                clientSecret,
-                refreshToken,
-                refreshUrl
-            }
-        },
-        serviceUrl
-    );
+    dsadmin:ConnectionConfig connectionConfig = {
+        auth: {
+            clientId: clientId,
+            clientSecret: clientSecret,
+            refreshToken: refreshToken,
+            refreshUrl: refreshUrl
+        }
+    };
+
+    dsadmin:Client docuSignClient = check new (serviceUrl, connectionConfig);
 
     dsadmin:OrganizationsResponse orgResponse = check docuSignClient->/v2/organizations();
     io:println("Organizations: ", orgResponse);
@@ -55,13 +54,13 @@ public function main() returns error? {
     }
 
     dsadmin:NewUserRequest newUserReq = {
-        userName: "user1",
-        firstName: "name1",
+        "userName": "user1",
+        "firstName": "name1",
         email: "user1@docusignmail.com",
         accounts: [
             {
                 id: accountId,
-                companyName: "Company"
+                "companyName": "Company"
             }
         ]
     };
@@ -69,11 +68,11 @@ public function main() returns error? {
     dsadmin:NewUserResponse newUserResponse = check docuSignClient->/v2/organizations/[organizationId]/users.post(newUserReq);
     io:println("New user created: ", newUserResponse);
 
-    string? userId = newUserResponse.id;
-    if userId is () {
+    string? newUserId = newUserResponse.id;
+    if newUserId is () {
         return error("User id not found");
     }
 
-    dsadmin:OrganizationUsersResponse userInformation = check docuSignClient->/v2/organizations/[organizationId]/users(accountId = accountId, email = email);
+    dsadmin:OrganizationUsersResponse userInformation = check docuSignClient->/v2/organizations/[organizationId]/users(account_id = accountId, email = email);
     io:println("User Information in the Organization: ", userInformation);
 }
