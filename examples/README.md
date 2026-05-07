@@ -1,28 +1,22 @@
-## Examples
+# Examples
 
-The DocuSign Admin connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-docusign.dsadmin/tree/main/examples).
+The `docusign.dsadmin` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-docusign.dsadmin/tree/main/examples), covering use cases like permissions in organizations, and manage user information.
 
-1. [Manage user information with DocuSign Admin](https://github.com/ballerina-platform/module-ballerinax-docusign.dsadmin/tree/main/examples/manage-user-information)
-    This example shows how to use DocuSign Admin API to to create users and retrieve user informations related to eSignature tasks.
+1. [Permissions in organizations](https://github.com/ballerina-platform/module-ballerinax-docusign.dsadmin/tree/main/examples/permissions-in-organizations) - Manage and configure permission profiles for users within a DocuSign organization.
 
-2. [Access permissions in user accounts](https://github.com/ballerina-platform/module-ballerinax-docusign.dsadmin/tree/main/examples/permissions-in-organizations)
-    This example shows how to use DocuSign Admin API to to view permission details of the user accounts.
+2. [Manage user information](https://github.com/ballerina-platform/module-ballerinax-docusign.dsadmin/tree/main/examples/manage-user-information) - Retrieve, update, and manage user account information within a DocuSign organization.
 
 ## Prerequisites
 
-1. Follow the [instructions](https://github.com/ballerina-platform/module-ballerinax-docusign.dsadmin#set-up-guide) to set up the DocuSign Admin API.
+1. Generate DocuSign credentials to authenticate the connector as described in the [Setup guide](https://central.ballerina.io/ballerinax/docusign.dsadmin/latest#setup-guide).
 
-2. For each example, create a `Config.toml` file with your OAuth2 tokens, client ID, and client secret. Here's an example of how your `Config.toml` file should look:
+2. For each example, create a `Config.toml` file the related configuration. Here's an example of how your `Config.toml` file should look:
 
     ```toml
-    clientId="<Client ID>"
-    clientSecret="<Client Secret>"
-    refreshToken="<Refresh Token>"
-    refreshUrl="<Refresh URL>"
-    accountId = "<Account ID>"
+    token = "<Access Token>"
     ```
 
-## Running an example
+## Running an Example
 
 Execute the following commands to build an example from the source:
 
@@ -36,22 +30,4 @@ Execute the following commands to build an example from the source:
 
     ```bash
     bal run
-    ```
-
-## Building the examples with the local module
-
-**Warning**: Due to the absence of support for reading local repositories for single Ballerina files, the Bala of the module is manually written to the central repository as a workaround. Consequently, the bash script may modify your local Ballerina repositories.
-
-Execute the following commands to build all the examples against the changes you have made to the module locally:
-
-* To build all the examples:
-
-    ```bash
-    ./build.sh build
-    ```
-
-* To run all the examples:
-
-    ```bash
-    ./build.sh run
     ```
